@@ -31,18 +31,19 @@ CREATE TABLE IF NOT EXISTS tasks (
   id           uuid DEFAULT gen_random_uuid(),
   title        text,
   description  text,
-  status       status DEFAULT 'TO_DO',
+  status       status,
   created_at   timestamptz NOT NULL DEFAULT now(),
   updated_at   timestamptz NOT NULL DEFAULT now()
 );
 
-ALTER TABLE tasks ENABLE ROW LEVEL SECURITY;
+-- ALTER TABLE tasks ENABLE ROW LEVEL SECURITY;
 
 GRANT
-select,
-insert (title, description, status),
-update (title, description, status),
-delete ON tasks to graphile_starter_visitor;
+  select,
+  insert (title, description, status),
+  update (title, description, status),
+  delete
+ON app_public.tasks to :DATABASE_VISITOR;
 
 --------------------------------------------------------------------------------
 

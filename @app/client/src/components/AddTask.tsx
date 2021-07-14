@@ -12,12 +12,12 @@ function AddTask() {
     setIsVisible(false);
     console.log(formData);
 
-    try {
-      await addTask({variables: formData});
-    } catch (err) {
-      console.warn(err);
-      // setError("There was an error creating the task");
-    }
+    // try {
+    //   await addTask({variables: formData});
+    // } catch (err) {
+    //   console.warn(err);
+    //   setError("There was an error creating the task");
+    // }
   }
 
   return (
@@ -35,11 +35,15 @@ function AddTask() {
         <Form.Item
           label="Description"
           name="description"
+          rules={[{required: true, message: "Enter a description"}]}
         >
           <Input />
         </Form.Item>
-        <Form.Item name="status">
-          <Select defaultValue="TO_DO">
+        <Form.Item
+          name="status"
+          rules={[{required: true, message: "Select a status"}]}
+        >
+          <Select>
             <Option value="TO_DO">To Do</Option>
             <Option value="IN_PROGRESS">In Progress</Option>
             <Option value="DONE">Done</Option>
