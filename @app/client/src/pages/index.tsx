@@ -5,6 +5,8 @@ import { SharedLayout } from "@app/components";
 import { useSharedQuery } from "@app/graphql";
 import { NextPage } from "next";
 
+import TaskList from "../components/TaskList";
+
 // Convenience helper
 const Li = ({ children, ...props }: any) => (
   <li {...props}>
@@ -16,7 +18,8 @@ const Home: NextPage = () => {
   const query = useSharedQuery();
   return (
     <SharedLayout title="" query={query}>
-      <Row justify="space-between" gutter={32}>
+      <TaskList></TaskList>
+      {/* <Row justify="space-between" gutter={32}>
         <Col xs={24} sm={16}>
           <Title data-cy="homepage-header">
             Welcome to the PostGraphile starter
@@ -296,7 +299,7 @@ const Home: NextPage = () => {
           </Paragraph>
           <Paragraph>Thank you! 🙏</Paragraph>
         </Col>
-      </Row>
+      </Row> */}
     </SharedLayout>
   );
 };

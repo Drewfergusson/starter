@@ -22,6 +22,28 @@ migration framework if you prefer.
 
 */
 
+DROP TABLE IF EXISTS tasks;
+DROP TYPE IF EXISTS status;
+
+CREATE TYPE status AS ENUM ('TO_DO', 'IN_PROGRESS', 'DONE');
+
+CREATE TABLE IF NOT EXISTS tasks (
+  id           uuid DEFAULT gen_random_uuid(),
+  title        text,
+  description  text,
+  status       status DEFAULT 'TO_DO',
+  created_at   timestamptz NOT NULL DEFAULT now(),
+  updated_at   timestamptz NOT NULL DEFAULT now()
+);
+
+ALTER TABLE tasks ENABLE ROW LEVEL SECURITY;
+
+GRANT
+select,
+insert (title, description, status),
+update (title, description, status),
+delete ON tasks to graphile_starter_visitor;
+
 --------------------------------------------------------------------------------
 
 /*
