@@ -40,6 +40,7 @@ function AddTask(props) {
         <Form.Item
           label="Title"
           name="title"
+          key="title"
           rules={[{required: true, message: "Enter a title"}]}
         >
           <Input placeholder="add a title" />
@@ -47,12 +48,14 @@ function AddTask(props) {
         <Form.Item
           label="Description"
           name="description"
+          key="description"
           rules={[{required: true, message: "Enter a description"}]}
         >
           <Input placeholder="add a description" />
         </Form.Item>
         <Form.Item
           name="status"
+          key="status"
           rules={[{required: true, message: "select a status"}]}
         >
           <Select placeholder="Select current status">
