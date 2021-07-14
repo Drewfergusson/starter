@@ -36,8 +36,6 @@ CREATE TABLE IF NOT EXISTS tasks (
   updated_at   timestamptz NOT NULL DEFAULT now()
 );
 
--- ALTER TABLE tasks ENABLE ROW LEVEL SECURITY;
-
 GRANT
   select,
   insert (title, description, status),
