@@ -2,7 +2,10 @@ import { useCurrentTasksQuery } from '@app/graphql';
 import { Table } from 'antd';
 import React from 'react';
 
+import AddTask from './AddTask';
+
 function TaskList() {
+
   const { data, loading, error } = useCurrentTasksQuery();
   if(error) {
     return <div>Error</div>;
@@ -24,7 +27,10 @@ function TaskList() {
     }
   })
   return (
-    <Table dataSource={rows} columns={columns}></Table>
+    <div>
+      <AddTask></AddTask>
+      <Table dataSource={rows} columns={columns}></Table>
+    </div>
   )
 }
 
