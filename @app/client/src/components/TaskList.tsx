@@ -5,8 +5,9 @@ import React from 'react';
 import AddTask from './AddTask';
 
 function TaskList() {
-
+  const [, forceUpdate] = React.useReducer(x => x + 1, 0);
   const { data, loading, error } = useCurrentTasksQuery();
+
   if(error) {
     return <div>Error</div>;
   }
@@ -28,7 +29,7 @@ function TaskList() {
   })
   return (
     <div>
-      <AddTask></AddTask>
+      <AddTask callback={() => forceUpdate()}></AddTask>
       <Table dataSource={rows} columns={columns}></Table>
     </div>
   )

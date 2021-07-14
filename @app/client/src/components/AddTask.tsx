@@ -3,21 +3,22 @@ import { Button,Form, Input, Modal, Select } from 'antd';
 import React from 'react';
 const { Option } = Select;
 
-function AddTask() {
+function AddTask(props) {
   const [ isVisible, setIsVisible ] = React.useState(false);
   const [ error, setError ] = React.useState(null);
   const [ addTask ] = useAddTaskMutation();
 
   const createTask = async (formData) => {
     setIsVisible(false);
-    console.log(formData);
-
-    // try {
-    //   await addTask({variables: formData});
-    // } catch (err) {
-    //   console.warn(err);
-    //   setError("There was an error creating the task");
-    // }
+    try {
+      await addTask({variables: formData});
+      // This is a temporaty solution for refreshing the window when a task is successfully create
+      // Ideally we would have the antd table update
+      window.location.reload();
+    } catch (err) {
+      console.warn(err);
+      setError("There was an error creating the task");
+    }
   }
 
   return (
