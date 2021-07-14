@@ -31,33 +31,37 @@ function AddTask(props) {
   return (
     <div>
     <Button onClick={() => setIsVisible(true)}>Create Task</Button>
-    <Modal visible={isVisible} onOk={createTask} onCancel={() => setIsVisible(false)}>
+    <Modal
+      visible={isVisible} onOk={createTask}
+      onCancel={() => setIsVisible(false)}
+      footer={[<Button onClick={() => setIsVisible(false)}>Cancel</Button>]}
+    >
       <Form onFinish={createTask}>
         <Form.Item
           label="Title"
           name="title"
           rules={[{required: true, message: "Enter a title"}]}
         >
-          <Input />
+          <Input placeholder="add a title" />
         </Form.Item>
         <Form.Item
           label="Description"
           name="description"
           rules={[{required: true, message: "Enter a description"}]}
         >
-          <Input />
+          <Input placeholder="add a description" />
         </Form.Item>
         <Form.Item
           name="status"
-          rules={[{required: true, message: "Select a status"}]}
+          rules={[{required: true, message: "select a status"}]}
         >
-          <Select>
+          <Select placeholder="Select current status">
             <Option value="TO_DO">To Do</Option>
             <Option value="IN_PROGRESS">In Progress</Option>
             <Option value="DONE">Done</Option>
           </Select>
         </Form.Item>
-        <Button type="primary" htmlType="submit">Create</Button>
+        <Button type="primary" htmlType="submit">Create Task</Button>
       </Form>
     </Modal>
     </div>
