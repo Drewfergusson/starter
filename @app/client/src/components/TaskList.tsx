@@ -34,7 +34,7 @@ function TaskList() {
   })
   return (
     <div>
-      <AddTask callback={() => forceUpdate()}></AddTask>
+      <AddTask onSuccess={() => forceUpdate()}></AddTask>
       <Table dataSource={rows} columns={columns}></Table>
     </div>
   )

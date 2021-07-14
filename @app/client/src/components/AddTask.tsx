@@ -1,4 +1,5 @@
 import { useAddTaskMutation } from "@app/graphql";
+import { useApolloClient } from "@apollo/client";
 import { Button,Form, Input, Modal, Select } from 'antd';
 import React from 'react';
 const { Option } = Select;
@@ -10,6 +11,7 @@ const { Option } = Select;
 
 function AddTask(props) {
   const [ isVisible, setIsVisible ] = React.useState(false);
+  const client = useApolloClient();
   const [ error, setError ] = React.useState(null);
   const [ addTask ] = useAddTaskMutation();
 
@@ -17,9 +19,9 @@ function AddTask(props) {
     setIsVisible(false);
     try {
       await addTask({variables: formData});
-      // This is a temporaty solution for refreshing the window when a task is successfully create
-      // Ideally we would have the antd table update
-      window.location.reload();
+      client.resetStore();
+      props.onSuccess();
+
     } catch (err) {
       console.warn(err);
       setError("There was an error creating the task");
