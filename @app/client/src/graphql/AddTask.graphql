@@ -1,0 +1,13 @@
+mutation AddTask($title: String!, $description: String!, $status: Status!) {
+  createTask(input: {
+    task: {
+      description: $description,
+      status: $status,
+      title: $title
+    }
+  }) {
+    task {
+      id
+    }
+  }
+}

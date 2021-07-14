@@ -1,0 +1,14 @@
+query CurrentTasks {
+  tasks {
+    edges {
+      node {
+        id
+        createdAt
+        description
+        status
+        title
+        updatedAt
+      }
+    }
+  }
+}

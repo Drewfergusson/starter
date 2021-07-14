@@ -22,6 +22,27 @@ migration framework if you prefer.
 
 */
 
+DROP TABLE IF EXISTS tasks;
+DROP TYPE IF EXISTS status;
+
+CREATE TYPE status AS ENUM ('TO_DO', 'IN_PROGRESS', 'DONE');
+
+CREATE TABLE IF NOT EXISTS tasks (
+  id           uuid DEFAULT gen_random_uuid(),
+  title        text,
+  description  text,
+  status       status,
+  created_at   timestamptz NOT NULL DEFAULT now(),
+  updated_at   timestamptz NOT NULL DEFAULT now()
+);
+
+GRANT
+  select,
+  insert (title, description, status),
+  update (title, description, status),
+  delete
+ON app_public.tasks to :DATABASE_VISITOR;
+
 --------------------------------------------------------------------------------
 
 /*
