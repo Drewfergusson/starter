@@ -4,6 +4,11 @@ import React from 'react';
 
 import AddTask from './AddTask';
 
+/**
+ * This is the main view component for the table of tasks.
+ * TaskList handles querying and filtering for displaying tasks.
+ */
+
 function TaskList() {
   const [, forceUpdate] = React.useReducer(x => x + 1, 0);
   const { data, loading, error } = useCurrentTasksQuery();
